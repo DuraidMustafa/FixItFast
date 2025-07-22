@@ -40,7 +40,8 @@ git clone https://github.com/yourusername/fixitfast.git
 cd fixitfast
 
 # Install dependencies
-pnpm install
+npm install
 
 # Run the dev server
-pnpm dev
+npm dev
+```

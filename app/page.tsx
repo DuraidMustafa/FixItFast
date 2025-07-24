@@ -735,11 +735,13 @@ export default function FitItFastLanding() {
                 FitItFast
               </span>
             </div>
-            <div className='text-center text-gray-500'>
+            <div className='text-center text-gray-500 flex justify-center items-start flex-col'>
               <p>
                 &copy; {new Date().getFullYear()} FitItFast. Built for
                 developers who love a challenge.
-              </p>
+              </p>{" "}
+              Note: UI generated using Tailwind UI / AI tools to save time and
+              focus on backend systems.
             </div>
           </div>
         </div>

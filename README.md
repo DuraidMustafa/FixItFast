@@ -45,7 +45,3 @@ npm install
 # Run the dev server
 npm dev
 ```
-
-## Note:
-
-> UI generated using Tailwind UI / AI tools to save time and focus on backend systems.

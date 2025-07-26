@@ -15,11 +15,12 @@ datasource db {
 }
 
 model Challenge {
-  id        String   @id @default(cuid())
-  title     String
-  slug      String   @unique
-  template  String
-  files     Json // array of { path: string, code: string }
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(cuid())
+  title      String
+  slug       String   @unique
+  template   String
+  difficulty String
+  files      Json
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

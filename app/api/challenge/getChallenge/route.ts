@@ -16,6 +16,7 @@ export async function GET(request: NextRequest) {
       },
     });
     const challenge = challenges[Math.floor(Math.random() * challenges.length)];
+    console.log(challenge);
 
     return new Response(
       JSON.stringify({

@@ -21,6 +21,7 @@ model Challenge {
   template   String
   difficulty String
   files      Json
+  test       String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }

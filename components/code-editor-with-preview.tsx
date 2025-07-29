@@ -1,4 +1,3 @@
-// Fixed: CodeEditorWithPreview.tsx
 "use client";
 
 import {
@@ -10,6 +9,7 @@ import {
 } from "@codesandbox/sandpack-react";
 import { dracula } from "@codesandbox/sandpack-themes";
 import { useEffect, useState, useRef } from "react";
+import { SubmitButtonHandle } from "./submit-button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Code, Zap, XCircle } from "lucide-react";
@@ -35,6 +35,7 @@ export default function CodeEditorWithPreview({
   const [template, setTemplate] = useState();
   const [files, setFiles] = useState<Record<string, ChallengeFile>>({});
   const [title, setTitle] = useState<string>("");
+  const [test, setTest] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
 
   const [showResultModal, setShowResultModal] = useState(false);
@@ -48,6 +49,7 @@ export default function CodeEditorWithPreview({
   const [inlineErrorMessage, setInlineErrorMessage] = useState("");
 
   const timeoutTriggeredRef = useRef(false);
+  const submitButtonRef = useRef<SubmitButtonHandle>(null);
 
   useEffect(() => {
     const queryParams = new URLSearchParams({
@@ -66,6 +68,8 @@ export default function CodeEditorWithPreview({
         setTemplate(challenge.template);
         setFiles(challenge.files);
         setTitle(challenge.title);
+        setTest(challenge.test);
+        console.log("Test", challenge.test);
       } catch (error) {
         console.error(error);
       } finally {
@@ -101,14 +105,21 @@ export default function CodeEditorWithPreview({
   };
 
   const handleTimeUp = () => {
+    console.log("Time is up! Running final test...");
     timeoutTriggeredRef.current = true;
-    const submitButton = document.querySelector(
-      '[data-testid="submit-button"]',
-    ) as HTMLButtonElement;
-    if (submitButton) {
-      setTimeout(() => {
-        submitButton.click();
-      }, 100);
+
+    // Directly call the submit function through the ref
+    if (submitButtonRef.current) {
+      submitButtonRef.current.submit();
+    } else {
+      // Fallback: show modal directly if submit ref not available
+      setTestResult({
+        status: "fail",
+        message: "Time limit exceeded - could not run final test",
+        isTimeUp: true,
+      });
+      setShowResultModal(true);
+      setShowInlineError(false);
     }
   };
 
@@ -120,6 +131,7 @@ export default function CodeEditorWithPreview({
     setShowResultModal(false);
     setShowInlineError(false);
     setTestResult({ status: "fail", message: "" });
+    timeoutTriggeredRef.current = false;
   };
 
   useEffect(() => {
@@ -142,7 +154,7 @@ export default function CodeEditorWithPreview({
         setTimeout(() => setShowInlineError(false), 8000);
       }
 
-      previousConsoleError(...args); // ✅ Let ConsoleResultListener catch the rest
+      previousConsoleError(...args);
     };
 
     return () => {
@@ -248,12 +260,11 @@ export default function CodeEditorWithPreview({
                     <div className='text-sm text-gray-400'>
                       Click Submit to test your solution
                     </div>
-                    <SubmitButton onTestResult={handleTestResult} />
-                    <button
-                      data-testid='submit-button'
-                      style={{ display: "none" }}>
-                      Hidden Submit
-                    </button>
+                    <SubmitButton
+                      ref={submitButtonRef}
+                      test={test}
+                      onTestResult={handleTestResult}
+                    />
                   </div>
                 </div>
               </SandpackProvider>

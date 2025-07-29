@@ -37,7 +37,8 @@ export function Timer({
         if (prev <= 1) {
           clearInterval(interval);
           setIsActive(false);
-          onTimeUp();
+          // Call onTimeUp directly when timer reaches 0
+          setTimeout(() => onTimeUp(), 100);
           return 0;
         }
         return prev - 1;

@@ -13,9 +13,11 @@ export const SubmitButton = forwardRef(
     {
       onTestResult,
       test,
+      language,
     }: {
       onTestResult: (status: "pass" | "fail", message: string) => void;
       test: String;
+      language: String;
     },
     ref,
   ) => {
@@ -27,6 +29,13 @@ export const SubmitButton = forwardRef(
       try {
         const finalCode: any = test;
         setTimeout(() => {
+          if (language == "typescript") {
+            sandpack.updateFile("/index.tsx", finalCode);
+            console.log("Test code injected and ready to execute");
+            console.log(finalCode);
+
+            return;
+          }
           sandpack.updateFile("/index.js", finalCode);
           console.log("Test code injected and ready to execute");
         }, 100);
@@ -43,11 +52,11 @@ export const SubmitButton = forwardRef(
     return (
       <Button
         onClick={handleSubmit}
-        className='bg-blue-600 text-white hover:bg-blue-700 transition-colors'
-        disabled={!sandpack.files["/App.js"]}>
+        className='bg-blue-600 text-white hover:bg-blue-700 transition-colors'>
         <Send className='w-4 h-4 mr-2' />
         Submit Solution
       </Button>
     );
   },
 );
+

@@ -7,7 +7,14 @@ export async function GET(request: NextRequest) {
 
     const difficulty = searchParams.get("difficulty") ?? undefined;
     const language = searchParams.get("language") ?? undefined;
-    let template = language;
+    let template;
+    if (language == "typescript") {
+      template = "react-ts";
+    } else if (language == "javascript") {
+      template = "vanilla";
+    } else {
+      template = language;
+    }
 
     const challenges = await prisma.challenge.findMany({
       where: {
@@ -16,7 +23,6 @@ export async function GET(request: NextRequest) {
       },
     });
     const challenge = challenges[Math.floor(Math.random() * challenges.length)];
-    console.log(challenge);
 
     return new Response(
       JSON.stringify({

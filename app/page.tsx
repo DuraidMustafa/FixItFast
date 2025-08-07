@@ -28,6 +28,7 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function FitItFastLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -49,16 +50,21 @@ export default function FitItFastLanding() {
 
           {/* Desktop Navigation */}
           <div className='hidden md:flex items-center space-x-4'>
-            <Button
-              variant='ghost'
-              className='text-gray-300 hover:text-white hover:bg-gray-800'>
-              <Github className='h-4 w-4 mr-2' />
-              View on GitHub
-            </Button>
-            <Button className='bg-emerald-500 hover:bg-emerald-600 text-black font-semibold'>
-              Get Started
-              <ArrowRight className='h-4 w-4 ml-2' />
-            </Button>
+            {" "}
+            <a href='https://github.com/DuraidMustafa/FixItFast'>
+              <Button
+                variant='ghost'
+                className='text-gray-300 hover:text-white hover:bg-gray-800'>
+                <Github className='h-4 w-4 mr-2' />
+                View on GitHub
+              </Button>
+            </a>
+            <Link href='/dashboard'>
+              <Button className='bg-emerald-500 hover:bg-emerald-600 text-black font-semibold'>
+                Get Started
+                <ArrowRight className='h-4 w-4 ml-2' />
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -77,16 +83,20 @@ export default function FitItFastLanding() {
         {mobileMenuOpen && (
           <div className='md:hidden border-t border-gray-800/50 bg-black/95 backdrop-blur-sm'>
             <div className='container mx-auto px-6 py-4 space-y-4'>
-              <Button
-                variant='ghost'
-                className='w-full justify-start text-gray-300 hover:text-white hover:bg-gray-800'>
-                <Github className='h-4 w-4 mr-2' />
-                View on GitHub
-              </Button>
-              <Button className='w-full bg-emerald-500 hover:bg-emerald-600 text-black font-semibold'>
-                Get Started
-                <ArrowRight className='h-4 w-4 ml-2' />
-              </Button>
+              <a href='https://github.com/DuraidMustafa/FixItFast'>
+                <Button
+                  variant='ghost'
+                  className='w-full justify-start text-gray-300 hover:text-white hover:bg-gray-800'>
+                  <Github className='h-4 w-4 mr-2' />
+                  View on GitHub
+                </Button>
+              </a>
+              <Link href='/dashboard'>
+                <Button className='w-full bg-emerald-500 hover:bg-emerald-600 text-black font-semibold'>
+                  Get Started
+                  <ArrowRight className='h-4 w-4 ml-2' />
+                </Button>
+              </Link>
             </div>
           </div>
         )}
@@ -136,13 +146,14 @@ export default function FitItFastLanding() {
               Built for those who want to sharpen real-world web dev skills —
               fast.
             </p>
-
-            <Button
-              size='lg'
-              className='text-lg md:text-xl px-8 md:px-12 py-6 md:py-8 bg-emerald-500 hover:bg-emerald-600 text-black font-bold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all'>
-              <Rocket className='h-5 w-5 md:h-6 md:w-6 mr-3' />
-              Get Started Now
-            </Button>
+            <Link href='/dashboard'>
+              <Button
+                size='lg'
+                className='text-lg md:text-xl px-8 md:px-12 py-6 md:py-8 bg-emerald-500 hover:bg-emerald-600 text-black font-bold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all'>
+                <Rocket className='h-5 w-5 md:h-6 md:w-6 mr-3' />
+                Get Started Now
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -705,19 +716,23 @@ export default function FitItFastLanding() {
           </p>
 
           <div className='flex flex-col sm:flex-row gap-4 md:gap-6 justify-center'>
-            <Button
-              size='lg'
-              className='text-lg md:text-xl px-8 md:px-12 py-6 md:py-8 bg-emerald-500 hover:bg-emerald-600 text-black font-bold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all'>
-              <Rocket className='h-5 w-5 md:h-6 md:w-6 mr-3' />
-              Get Started Now
-            </Button>
-            <Button
-              size='lg'
-              variant='outline'
-              className='text-lg md:text-xl px-8 md:px-12 py-6 md:py-8 border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white bg-transparent'>
-              <Github className='h-5 w-5 md:h-6 md:w-6 mr-3' />
-              View on GitHub
-            </Button>
+            <Link href={"/dashboard"}>
+              <Button
+                size='lg'
+                className='text-lg md:text-xl px-8 md:px-12 py-6 md:py-8 bg-emerald-500 hover:bg-emerald-600 text-black font-bold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all'>
+                <Rocket className='h-5 w-5 md:h-6 md:w-6 mr-3' />
+                Get Started Now
+              </Button>
+            </Link>
+            <a href='https://github.com/DuraidMustafa/FixItFast'>
+              <Button
+                size='lg'
+                variant='outline'
+                className='text-lg md:text-xl px-8 md:px-12 py-6 md:py-8 border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white bg-transparent'>
+                <Github className='h-5 w-5 md:h-6 md:w-6 mr-3' />
+                View on GitHub
+              </Button>
+            </a>
           </div>
         </div>
       </section>

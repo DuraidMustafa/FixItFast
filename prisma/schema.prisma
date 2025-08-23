@@ -21,9 +21,11 @@ model Challenge {
 }
 
 model Room {
-  id           String   @id @default(cuid())
-  players      String[]
-  requirements Json
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id         String   @id @default(cuid())
+  players    String[]
+  time       String
+  difficulty String
+  template   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
